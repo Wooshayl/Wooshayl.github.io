@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lilian Cao — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F3F4F6;
+    --surface:#FFFFFF;
+    --ink:#1B2430;
+    --muted:#5B6672;
+    --accent:#2B6CB0;
+    --line:#DCE0E6;
+  }
+
+  *{ box-sizing:border-box; }
+
+  @media (prefers-reduced-motion: no-preference){
+    html{ scroll-behavior:smooth; }
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', system-ui, sans-serif;
+    font-weight:600;
+    line-height:1.15;
+    margin:0 0 0.5em;
+  }
+
+  a{ color:inherit; text-decoration:none; border-bottom:1px solid var(--line); }
+  a:hover{ border-bottom-color:var(--accent); }
+  a:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+  .site-header{
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:980px; margin:0 auto; padding:1.5rem 1.5rem 0;
+  }
+  .mark{ font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.05rem; border-bottom:none; }
+  .header-right{ display:flex; align-items:center; flex-wrap:wrap; gap:0.5rem 1.5rem; }
+  .site-nav{ display:flex; gap:1.5rem; }
+  .site-nav a{ font-size:0.95rem; border-bottom:none; color:var(--muted); }
+  .site-nav a:hover{ color:var(--ink); border-bottom-color:var(--accent); }
+  .lang-switch{ display:flex; gap:0.4rem; }
+  .lang-switch a{ font-size:0.85rem; border-bottom:none; color:var(--muted); padding:0.1rem 0.3rem; }
+  .lang-switch a.active{ color:var(--ink); font-weight:500; border-bottom:1px solid var(--accent); }
+  .lang-switch a:hover{ color:var(--ink); }
+
+  main{ max-width:980px; margin:0 auto; padding:0 1.5rem; }
+
+  .bracket-frame{ position:relative; --bracket:28px; }
+  .bracket-frame::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:
+      linear-gradient(var(--accent),var(--accent)) top left / var(--bracket) 2px no-repeat,
+      linear-gradient(var(--accent),var(--accent)) top left / 2px var(--bracket) no-repeat,
+      linear-gradient(var(--accent),var(--accent)) top right / var(--bracket) 2px no-repeat,
+      linear-gradient(var(--accent),var(--accent)) top right / 2px var(--bracket) no-repeat,
+      linear-gradient(var(--accent),var(--accent)) bottom left / var(--bracket) 2px no-repeat,
+      linear-gradient(var(--accent),var(--accent)) bottom left / 2px var(--bracket) no-repeat,
+      linear-gradient(var(--accent),var(--accent)) bottom right / var(--bracket) 2px no-repeat,
+      linear-gradient(var(--accent),var(--accent)) bottom right / 2px var(--bracket) no-repeat;
+  }
+
+  .hero{ padding:4rem 0 2.5rem; }
+  .hero-frame{ --bracket:34px; padding:3rem 2.5rem; max-width:640px; }
+  .hero-frame h1{ font-size:clamp(2.25rem, 5vw, 3.25rem); }
+  .tagline{ font-size:1.1rem; color:var(--muted); margin:0 0 0.5em; }
+  .hero-meta{ font-size:0.9rem; color:var(--muted); margin:0 0 1rem; }
+  .hero-text{ margin:0; max-width:58ch; }
+
+  .contact-row{ display:flex; flex-wrap:wrap; row-gap:0.5rem; margin-top:1.75rem; }
+  .contact-row a{ font-size:0.95rem; border-bottom:none; }
+  .contact-row a:not(:first-child){ border-left:1px solid var(--line); padding-left:1.25rem; margin-left:1.25rem; }
+  .cv-link{ display:inline-block; margin-top:1rem; font-weight:500; }
+
+  section{ padding:3rem 0; border-top:1px solid var(--line); }
+  .hero{ border-top:none; }
+  section > h2{ font-size:1.6rem; margin-bottom:1.5rem; }
+
+  .pdf-frame{
+    width:100%; max-width:760px; aspect-ratio:210/297;
+    border:1px solid var(--line); border-radius:4px; overflow:hidden; background:var(--surface);
+  }
+  .pdf-frame iframe{ width:100%; height:100%; border:0; }
+  .pdf-note{ font-size:0.85rem; color:var(--muted); margin-top:0.75rem; }
+
+  .tags{ list-style:none; display:flex; flex-wrap:wrap; gap:0.5rem; padding:0; margin:0; }
+  .tags li{
+    font-size:0.85rem; color:var(--muted);
+    border:1px solid var(--line); border-radius:4px;
+    padding:0.3rem 0.7rem; background:var(--surface);
+  }
+
+  .projet{ padding:2.5rem 0; }
+  .projet + .projet{ border-top:1px solid var(--line); }
+  .projet h3{ font-size:1.3rem; }
+  .projet > p{ max-width:62ch; margin-bottom:1rem; }
+  .projet .tags{ margin-bottom:1.5rem; }
+
+  .video-frame{ --bracket:18px; padding:12px; max-width:640px; margin-top:0.5rem; }
+  .video-inner{ position:relative; width:100%; aspect-ratio:16/9; background:#111; overflow:hidden; }
+  .video-inner iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .video-note{ font-size:0.85rem; color:var(--muted); margin-top:0.75rem; max-width:56ch; }
+
+  .carousel{
+    display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory;
+    max-width:640px; padding-bottom:8px; margin-top:0.5rem;
+  }
+  .carousel-slide{
+    flex:0 0 85%; aspect-ratio:16/9; scroll-snap-align:center;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    padding:1rem; border:1px dashed var(--line); border-radius:2px;
+    color:var(--muted); font-size:0.85rem; background:var(--surface);
+  }
+  .site-link{ display:inline-block; margin-top:1rem; font-weight:500; }
+
+  footer{ border-top:1px solid var(--line); padding:2.5rem 1.5rem 3rem; max-width:980px; margin:0 auto; }
+  footer p{ margin:0.25rem 0; font-size:0.9rem; }
+  footer .muted{ color:var(--muted); }
+
+  @media (max-width:640px){
+    .site-header{ flex-direction:column; align-items:flex-start; gap:0.75rem; padding-top:1.25rem; }
+    .hero{ padding-top:2.5rem; }
+    .hero-frame{ padding:2rem 1.25rem; --bracket:24px; }
+    main{ padding:0 1.25rem; }
+    .pdf-frame{ aspect-ratio:auto; height:70vh; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="mark" href="#top">Lilian Cao</a>
+    <div class="header-right">
+      <nav class="site-nav">
+        <a href="#cv">CV</a>
+        <a href="#projets">Projets</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="lang-switch">
+        <a href="/fr/" class="active">FR</a>
+        <a href="/en/">EN</a>
+        <a href="/es/">ES</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="bracket-frame hero-frame">
+        <h1>Lilian Cao</h1>
+        <p class="tagline">Étudiant Ingénieur EFREI &ndash; Data &amp; Intelligence Artificielle | Recherche de stage</p>
+        <p class="hero-meta">Paris (75012), France</p>
+        <p class="hero-text">Étudiant ingénieur en 4<sup>e</sup> année à l'EFREI Paris, spécialisation Data &amp; Intelligence Artificielle. Recherche un stage de Data Analyst ou en Intelligence Artificielle d'environ 22 semaines, du 2 novembre 2026 au 2 avril 2027.</p>
+      </div>
+      <div class="contact-row">
+        <a href="mailto:liliancao.pa@gmail.com">liliancao.pa@gmail.com</a>
+        <a href="tel:+33617811347">06 17 81 13 47</a>
+        <a href="https://www.linkedin.com/in/lilian-cao-8a9b60291/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Wooshayl" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+
+    <section id="cv">
+      <h2>CV</h2>
+      <div class="pdf-frame">
+        <iframe src="/cv/CV_Lilian_Cao_FR.pdf" title="CV de Lilian Cao" loading="lazy"></iframe>
+      </div>
+      <p class="pdf-note">Si le PDF ne s'affiche pas directement, <a href="/cv/CV_Lilian_Cao_FR.pdf" target="_blank" rel="noopener">ouvre-le dans un nouvel onglet</a>.</p>
+    </section>
+
+    <section class="projets" id="projets">
+      <h2>Projets</h2>
+
+      <article class="projet">
+        <h3>Détection d'objets appliquée au rugby &ndash; Computer Vision</h3>
+        <p>Un modèle de computer vision qui détecte les joueurs, le ballon et les arbitres à partir de vidéos de matchs. Dataset constitué par extraction d'images annotées sur Roboflow, modèle YOLOv8 entraîné par transfer learning, avec un travail itératif sur les erreurs classiques du domaine (déséquilibre des classes, erreurs d'annotation).</p>
+        <ul class="tags">
+          <li>YOLOv8</li><li>Ultralytics</li><li>Roboflow</li><li>Transfer learning</li><li>Computer vision</li>
+        </ul>
+        <div class="bracket-frame video-frame">
+          <div class="video-inner">
+            <!-- Remplace VIDEO_ID_ICI par l'ID de ta vidéo YouTube -->
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_ICI" title="Démo &ndash; Détection d'objets appliquée au rugby" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <p class="video-note">Vidéo à ajouter : remplace VIDEO_ID_ICI dans le code par l'ID de ta vidéo YouTube (la partie après "v=" dans le lien).</p>
+      </article>
+
+      <article class="projet">
+        <h3>Plateforme de data analytics football &ndash; Ligue 1</h3>
+        <p>Une plateforme qui centralise des données de matchs multi-sources (événements, calendrier, marché des transferts) via un pipeline ETL avec modélisation relationnelle sur PostgreSQL (Supabase). Des modèles de Machine Learning (xG, xA, détection de style de jeu) alimentent une application web interactive multi-pages, déployée avec CI/CD.</p>
+        <ul class="tags">
+          <li>Python</li><li>PostgreSQL</li><li>Supabase</li><li>Streamlit</li><li>Machine Learning</li><li>CI/CD</li>
+        </ul>
+        <div class="carousel">
+          <!-- Remplace chaque bloc par une vraie balise : <img src="capture1.jpg" alt="..." class="carousel-slide" style="object-fit:cover;border:none;"> -->
+          <div class="carousel-slide">Capture d'écran 1</div>
+          <div class="carousel-slide">Capture d'écran 2</div>
+          <div class="carousel-slide">Capture d'écran 3</div>
+        </div>
+        <p class="video-note">Fais glisser pour voir les autres images. Remplace chaque bloc par une vraie capture d'écran (balise &lt;img&gt;, voir le commentaire dans le code).</p>
+        <a class="site-link" href="#" target="_blank" rel="noopener">Voir le site en ligne</a>
+      </article>
+
+      <article class="projet">
+        <h3>AI Lead Qualification Agent</h3>
+        <p>Un agent propulsé par l'IA qui extrait des informations structurées sur des prospects et leur attribue un score de qualification. Il intègre des API LLM, n8n, Airtable et Cal.com pour automatiser le routage et les actions de suivi, avec des mécanismes de validation et de revue humaine pour les cas incertains.</p>
+        <ul class="tags">
+          <li>API LLM</li><li>n8n</li><li>Airtable</li><li>Cal.com</li><li>Automatisation</li>
+        </ul>
+        <div class="bracket-frame video-frame">
+          <div class="video-inner">
+            <!-- Remplace VIDEO_ID_ICI par l'ID de ta vidéo YouTube -->
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_ICI" title="Démo &ndash; AI Lead Qualification Agent" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <p class="video-note">Vidéo à ajouter : remplace VIDEO_ID_ICI dans le code par l'ID de ta vidéo YouTube.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <p>Lilian Cao &ndash; <a href="mailto:liliancao.pa@gmail.com">liliancao.pa@gmail.com</a></p>
+    <p class="muted">liliancao.com</p>
+  </footer>
+
+</body>
+</html>
